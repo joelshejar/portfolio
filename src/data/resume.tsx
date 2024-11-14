@@ -11,7 +11,7 @@ export const DATA = {
     "Software Engineer. I love building things and helping people. Somewhat active on Twitter.",
   summary:
     "A dynamic and versatile developer, I specialize in building cross-platform solutions from the ground up, blending design and functionality to create accessible, high-performance applications. From microfrontends and notifications systems to complex editors and secure navigation in React, I ensure every feature delivers seamless, responsive experiences across devices and platforms.",
-  avatarUrl: "/me.png",
+  avatarUrl: "/joel.png",
   skills: [
     "React",
     "Next.js",
@@ -37,24 +37,24 @@ export const DATA = {
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "https://dub.sh/dillion-linkedin",
+        url: "https://www.linkedin.com/in/joelrajesh13/",
         icon: Icons.linkedin,
 
         navbar: true,
       },
       X: {
         name: "X",
-        url: "https://dub.sh/dillion-twitter",
+        url: "https://x.com/intent/follow?screen_name=JoelRajesh13",
         icon: Icons.x,
 
         navbar: true,
       },
-      Youtube: {
-        name: "Youtube",
-        url: "https://dub.sh/dillion-youtube",
-        icon: Icons.youtube,
-        navbar: true,
-      },
+      // Youtube: {
+      //   name: "Youtube",
+      //   url: "https://dub.sh/dillion-youtube",
+      //   icon: Icons.youtube,
+      //   navbar: true,
+      // },
       email: {
         name: "Send Email",
         url: "#",
@@ -67,14 +67,14 @@ export const DATA = {
 
   work: [
     {
-      company: "Atomic Finance",
-      href: "https://atomic.finance",
+      company: "Zellis",
+      href: "https://www.zellis.com/hcm-cloud/",
       badges: [],
       location: "Remote",
-      title: "Bitcoin Protocol Engineer",
-      logoUrl: "/atomic.png",
-      start: "May 2021",
-      end: "Oct 2022",
+      title: "Engineer - Frontend",
+      logoUrl: "/zellis.png",
+      start: "Jan 2024",
+      end: "Present",
       description:
         "Implemented the Bitcoin discreet log contract (DLC) protocol specifications as an open source Typescript SDK. Dockerized all microservices and setup production kubernetes cluster. Architected a data lake using AWS S3 and Athena for historical backtesting of bitcoin trading strategies. Built a mobile app using react native and typescript.",
     },
