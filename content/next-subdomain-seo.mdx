@@ -1,0 +1,241 @@
+---
+title: "🚀  Master Subdomain SEO in Next.js : A Step-by-Step Guide"
+publishedAt: "2024-10-18"
+summary: "Learn how to implement subdomain-based SEO in Next.js  with middleware, dynamic metadata, API-integrated sitemaps, and live examples."
+---
+
+
+Hello, Next.js enthusiasts! Ever wondered how to leverage **subdomains** to take your **SEO** strategy to the next level? Imagine serving tailored content, metadata, and dynamic sitemaps based on the subdomain—all made possible with the power of Next.js  and its Edge Runtime.
+
+In this blog, we’ll walk through implementing **subdomain-based SEO** in **Next.js 13+**, complete with middleware, dynamic metadata, and enhanced sitemaps. You’ll also learn how to verify your implementation using deployed examples.
+
+**💻 Example Repository**:  
+[GitHub Repo: next-subdomain-seo](https://github.com/joelshejar/next-subdomain-seo)
+
+---
+
+## 🌟 What Will You Learn?
+1. **Subdomain Detection** with Middleware 🛠️  
+2. Dynamic **SEO Metadata** ✨  
+3. Subdomain-Specific **Sitemap Generation** 📄 (with API Integration)  
+4. Example to Verify Metadata on Deployed Subdomains 🖼️  
+5. Full Project Setup with Deployment 🚀  
+
+---
+
+## 1. Subdomain Detection with Middleware
+
+The first step is to detect the subdomain for incoming requests. Middleware intercepts the request and prepares custom headers for downstream usage.
+
+Here’s the middleware implementation:
+
+```typescript
+import { NextRequest, NextResponse } from "next/server";
+
+export function middleware(req: NextRequest) {
+  const hostname = req.nextUrl.hostname;
+
+  // Extract subdomain (e.g., "blog" from "blog.joelrajesh.in")
+  const subdomain = hostname.includes('.joelrajesh.in')
+    ? hostname.split('.')[0]
+    : 'default';
+
+  console.log(`[Middleware] Subdomain detected: ${subdomain}`);
+
+  // Add subdomain to headers
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set('x-subdomain', subdomain);
+
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  });
+}
+
+export const config = {
+  matcher: '/:path*', // Apply middleware to all routes
+};
+
+```
+
+This middleware extracts the subdomain and forwards it to your application as a custom header (x-subdomain).
+
+## 2. Dynamic Metadata for Subdomain-Based SEO
+
+Dynamic metadata ensures that search engines and users get context-specific titles and descriptions for each subdomain. Using the `generateMetadata` function in Next.js 13, you can implement this seamlessly.
+
+```typescript
+import { headers } from 'next/headers';
+
+export async function generateMetadata() {
+  const headersList = await headers();
+  const subdomain = headersList.get('x-subdomain') || 'default';
+
+  const seoData = {
+    blog: {
+      title: "Joel's Blog - Tips & Tutorials",
+      description: "Explore tutorials, coding tips, and tech insights.",
+    },
+    shop: {
+      title: "Joel's Shop - Buy Amazing Tech",
+      description: "Discover the best tech products curated for you.",
+    },
+    default: {
+      title: "Joel Rajesh's Website",
+      description: "Welcome to Joel Rajesh's personal website.",
+    },
+  };
+
+  return seoData[subdomain] || seoData.default;
+}
+
+```
+
+This function dynamically adjusts the metadata based on the subdomain.
+
+## 3. Subdomain-Specific Sitemap Generation (with API Integration)
+
+Using the Edge Runtime, you can dynamically fetch data from APIs for each subdomain to create an SEO-optimized sitemap. For example, you can query a product API for the `shop` subdomain and include product URLs in the sitemap.
+
+```typescript
+import { headers } from "next/headers";
+import { MetadataRoute } from "next";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const headersList = await headers();
+  const subdomain = headersList.get("x-subdomain") || "default";
+  const baseUrl = `https://${subdomain}.joelrajesh.in`;
+
+  let dynamicRoutes = [];
+
+  if (subdomain === "shop") {
+    // Fetch products for the shop subdomain
+    const response = await fetch(`${baseUrl}/api/products`, {
+      next: { revalidate: 60 }, // Revalidate the data every 60 seconds
+    });
+    const products = await response.json();
+
+    dynamicRoutes = products.map((product: { id: string }) => ({
+      url: `${baseUrl}/product/${product.id}`,
+      lastModified: new Date().toISOString(),
+    }));
+  }
+
+  const staticRoutes = [
+    {
+      url: `${baseUrl}/`,
+      lastModified: new Date().toISOString(),
+    },
+    {
+      url: `${baseUrl}/about`,
+      lastModified: new Date().toISOString(),
+    },
+  ];
+
+  return [...staticRoutes, ...dynamicRoutes];
+}
+
+```
+
+### API Endpoint for Products
+Create a mock API endpoint to simulate fetching product data. Add the following to pages/api/products.ts:
+
+```typescript
+export default function handler(req, res) {
+  const products = [
+    { id: "product-1" },
+    { id: "product-2" },
+    { id: "product-3" },
+  ];
+
+  res.status(200).json(products);
+}
+```
+
+This allows your sitemap to include dynamic product data.
+
+## 4. Verifying Subdomain-Specific Metadata
+
+To test subdomain-specific metadata dynamically rendered based on the subdomain, follow these steps:
+
+### Access Deployed Subdomains
+
+- Visit [blog.joelrajesh.in](https://blog.joelrajesh.in) for the blog.
+- Visit [shop.joelrajesh.in](https://shop.joelrajesh.in) for the shop.
+
+### Inspect the Head Tag
+
+1. Right-click on the page and select **"View Page Source"**.
+2. Look for the `<title>` and `<meta name="description">` tags.
+
+### Example Outputs
+
+#### For **blog.joelrajesh.in**:
+```html
+<title>Joel's Blog - Tips & Tutorials</title>
+<meta name="description" content="Explore tutorials, coding tips, and tech insights.">
+```
+
+#### For **shop.joelrajesh.in**:
+```html
+<title>Joel's Shop - Buy Amazing Tech</title>
+<meta name="description" content="Discover the best tech products curated for you.">
+```
+
+This live example demonstrates how subdomain-specific SEO is dynamically handled.
+
+## 5. Full Project Setup with Deployment
+
+Follow these steps to set up the project locally and deploy it:
+
+### Step 1: Clone the Repository
+
+Clone the repository from GitHub:
+
+```bash
+git clone https://github.com/joelshejar/next-subdomain-seo.git
+cd next-subdomain-seo
+```
+
+### Step 2: Install Dependencies
+
+Install the required dependencies:
+
+```bash
+npm install
+```
+
+### Step 3: Run the Application Locally
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The application will run at http://localhost:3000.
+
+### Step 4: Test Subdomains Locally
+
+Update your hosts file to simulate subdomains locally:
+* On macOS/Linux: Edit /etc/hosts.
+* On Windows: Edit C:\Windows\System32\drivers\etc\hosts.
+
+Add these lines:
+
+```bash
+127.0.0.1 blog.localhost
+127.0.0.1 shop.localhost
+```
+
+Test the subdomains:
+* Visit http://blog.localhost:3000 for the blog.
+* Visit http://shop.localhost:3000 for the shop.
+
+
+## Final Thoughts
+🎉 Congratulations! You’ve built a subdomain-based SEO solution in Next.js 13. With middleware, dynamic metadata, and subdomain-specific sitemaps, your application is not just scalable—it’s optimized for search engines and users alike.
+
+Explore the deployed subdomains ([blog.joelrajesh.in](https://blog.joelrajesh.in) and [shop.joelrajesh.in](https://shop.joelrajesh.in)) to see this in action. Try it out and let us know how it works for you! 🚀
+
