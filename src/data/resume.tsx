@@ -76,31 +76,31 @@ export const DATA = {
       start: "January 2024",
       end: "Present",
       description:
-        "Implemented the Bitcoin discreet log contract (DLC) protocol specifications as an open source Typescript SDK. Dockerized all microservices and setup production kubernetes cluster. Architected a data lake using AWS S3 and Athena for historical backtesting of bitcoin trading strategies. Built a mobile app using react native and typescript.",
+        "Experienced in developing cross-platform microfrontends for web, iOS, and Android, ensuring compatibility across devices from mobile to extra-large monitors. Specialized in accessibility features like 'Skip to Main Content', WCAG 2.1-compliant navigation bars, and efficient data management using React Query, Repack, and Webpack. Optimized Azure DevOps pipelines, achieving faster build times with cached artifacts, and explored innovative tools like Devbox for virtual machine efficiency.",
     },
     {
       company: "Genpro Research",
       badges: [],
-      href: "https://shopify.com",
+      href: "https://www.genproresearch.com/maia-platform",
       location: "Remote",
       title: "Software Engineer",
       logoUrl: "/genpro.png",
       start: "January 2021",
       end: "April 2021",
       description:
-        "Implemented a custom Kubernetes controller in Go to automate the deployment of MySQL and ProxySQL custom resources in order to enable 2,000+ internal developers to instantly deploy their app databases to production. Wrote several scripts in Go to automate MySQL database failovers while maintaining master-slave replication topologies and keeping Zookeeper nodes consistent with changes.",
+        "Skilled in building robust component design systems with Yarn Workspaces, Style Dictionary, and Storybook, ensuring accessibility and seamless UI/UX. Proficient in optimizing performance for rich text editors using Slate.js, implementing real-time typing, pagination, track changes, and commenting systems. Experienced in developing scalable React applications like 'MAIA for CARS' using modern tools such as SCSS, Vite, Redux, and TypeScript. Expertise in secure navigation with React Router v6, reusable forms with React Hook Form, and real-time features like notifications with WebSockets. Adept at debugging, team collaboration, and enhancing user experiences through intuitive interfaces.",
     },
     {
       company: "Ambrezent Technologies",
-      href: "https://nvidia.com/",
+      href: "https://ambrezent.com//",
       badges: [],
-      location: "Santa Clara, CA",
+      location: "Remote",
       title: "Software Engineer",
       logoUrl: "/ambrezent.png",
       start: "January 2020",
       end: "April 2020",
       description:
-        "Architected and wrote the entire MVP of the GeForce Now Cloud Gaming internal admin and A/B testing dashboard using React, Redux, TypeScript, and Python.",
+        "Experienced in developing dynamic web pages using React and Firebase, including a home page and a mini shopping cart for a Granite store. Proficient in creating responsive and visually appealing designs with HTML and CSS.",
     },
   ],
   education: [
@@ -168,38 +168,38 @@ export const DATA = {
       video:
         "",
     },
-    {
-      title: "Magic UI",
-      href: "https://magicui.design",
-      dates: "June 2023 - Present",
-      active: true,
-      description:
-        "Designed, developed and sold animated UI components for developers.",
-      technologies: [
-        "Next.js",
-        "Typescript",
-        "PostgreSQL",
-        "Prisma",
-        "TailwindCSS",
-        "Stripe",
-        "Shadcn UI",
-        "Magic UI",
-      ],
-      links: [
-        {
-          type: "Website",
-          href: "https://magicui.design",
-          icon: <Icons.globe className="size-3" />,
-        },
-        {
-          type: "Source",
-          href: "https://github.com/magicuidesign/magicui",
-          icon: <Icons.github className="size-3" />,
-        },
-      ],
-      image: "",
-      video: "https://cdn.magicui.design/bento-grid.mp4",
-    },
+    // {
+    //   title: "Magic UI",
+    //   href: "https://magicui.design",
+    //   dates: "June 2023 - Present",
+    //   active: true,
+    //   description:
+    //     "Designed, developed and sold animated UI components for developers.",
+    //   technologies: [
+    //     "Next.js",
+    //     "Typescript",
+    //     "PostgreSQL",
+    //     "Prisma",
+    //     "TailwindCSS",
+    //     "Stripe",
+    //     "Shadcn UI",
+    //     "Magic UI",
+    //   ],
+    //   links: [
+    //     {
+    //       type: "Website",
+    //       href: "https://magicui.design",
+    //       icon: <Icons.globe className="size-3" />,
+    //     },
+    //     {
+    //       type: "Source",
+    //       href: "https://github.com/magicuidesign/magicui",
+    //       icon: <Icons.github className="size-3" />,
+    //     },
+    //   ],
+    //   image: "",
+    //   video: "https://cdn.magicui.design/bento-grid.mp4",
+    // },
   ],
   hackathons: [
     {
